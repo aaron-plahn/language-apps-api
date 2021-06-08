@@ -11,8 +11,17 @@ export class TermsService {
     @InjectRepository(Term)
     private termsRepository: Repository<Term>,
   ) {}
+
   create(createTermDto: CreateTermDto) {
-    return this.termsRepository.create(createTermDto);
+    const newTerm = this.termsRepository.create(createTermDto);
+
+    this.termsRepository.insert(createTermDto);
+
+    console.log({
+      message: 'create term',
+      newTerm,
+    });
+    return newTerm;
   }
 
   findAll() {
@@ -24,7 +33,10 @@ export class TermsService {
   }
 
   update(id: number, updateTermDto: UpdateTermDto) {
-    return this.termsRepository.update(id, updateTermDto);
+    return this.termsRepository.update(id, updateTermDto).then(
+      (_) => console.log('success'),
+      (reason) => console.log(`failed for reason ${reason}`),
+    );
   }
 
   remove(id: number) {

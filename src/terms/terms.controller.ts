@@ -1,7 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TermsService } from './terms.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateTermDto } from './dto/create-term.dto';
 import { UpdateTermDto } from './dto/update-term.dto';
+import { TermsService } from './terms.service';
 
 @Controller('terms')
 export class TermsController {
@@ -9,6 +17,10 @@ export class TermsController {
 
   @Post()
   create(@Body() createTermDto: CreateTermDto) {
+    console.log({
+      message: 'Posting a term',
+      data: createTermDto,
+    });
     return this.termsService.create(createTermDto);
   }
 

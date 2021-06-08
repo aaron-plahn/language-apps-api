@@ -3,7 +3,7 @@ export class CreateTermDto {
 
   text: string;
 
-  textInTranslationLanguage: string;
+  textInTranslationLanguage?: string;
 
   mediaItems?: string[];
 
